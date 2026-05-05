@@ -6,9 +6,9 @@
         </div>
         
         <div class="courses-slider" id="courses-slider">
-            <div class="grid grid-3">
+            <div class="courses-track">
                 <div class="course-card">
-                    <div class="course-icon icon icon--lg icon--gradient">💼</div>
+                    <div class="course-icon icon icon--lg icon--accent">💼</div>
                     <h3>Área Office</h3>
                     <ul class="list-arrow">
                         <li>Excel 365 - Básico/Intermedio/Avanzado</li>
@@ -19,7 +19,7 @@
                     </ul>
                 </div>
                 <div class="course-card">
-                    <div class="course-icon icon icon--lg icon--gradient">📦</div>
+                    <div class="course-icon icon icon--lg icon--accent">📦</div>
                     <h3>Área Bodega</h3>
                     <ul class="list-arrow">
                         <li>Administración de Bodegas</li>
@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 <div class="course-card">
-                    <div class="course-icon icon icon--lg icon--gradient">🧠</div>
+                    <div class="course-icon icon icon--lg icon--accent">🧠</div>
                     <h3>Psicología Laboral</h3>
                     <ul class="list-arrow">
                         <li>Prevención del Burnout</li>
@@ -41,7 +41,7 @@
                     </ul>
                 </div>
                 <div class="course-card">
-                    <div class="course-icon icon icon--lg icon--gradient">🏥</div>
+                    <div class="course-icon icon icon--lg icon--accent">🏥</div>
                     <h3>Área Salud</h3>
                     <ul class="list-arrow">
                         <li>RCP y Primeros Auxilios</li>
@@ -49,17 +49,6 @@
                         <li>Primeros Auxilios Psicológicos</li>
                         <li>Acreditación en Salud</li>
                         <li>IAAS</li>
-                    </ul>
-                </div>
-                <div class="course-card">
-                    <div class="course-icon icon icon--lg icon--gradient">🤝</div>
-                    <h3>Habilidades Transversales</h3>
-                    <ul class="list-arrow">
-                        <li>Liderazgo y Comunicación</li>
-                        <li>Gestión del Tiempo</li>
-                        <li>Negociación y Conflictos</li>
-                        <li>Trabajo en Equipo</li>
-                        <li>Comunicación Efectiva</li>
                     </ul>
                 </div>
                 <div class="course-card">
@@ -108,5 +97,19 @@
                 </div>
             </div>
         </div>
+        <!-- Controles del carrusel -->
+        <div class="carousel-controls">
+            <button class="carousel-btn courses-prev" onclick="scrollCourses(-1)">‹</button>
+            <button class="carousel-btn courses-next" onclick="scrollCourses(1)">›</button>
+        </div>
+        
+        <script>
+        function scrollCourses(direction) {
+            var slider = document.getElementById('courses-slider');
+            if (!slider) return;
+            var scrollAmount = slider.offsetWidth * 0.75;
+            slider.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+        </script>
     </div>
 </section>

@@ -455,7 +455,7 @@
 
 .team-slider {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     padding-bottom: 3rem;
 }
 
@@ -465,7 +465,7 @@
 }
 
 .team-slider .team-card {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc(100% / 2);
     padding: 0.5rem;
 }
 

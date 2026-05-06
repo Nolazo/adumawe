@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: 'dist', // Serve files from dist folder (after build.js processes includes)
+  base: '/adumawe/', // ✅ Correct! Base path for GitHub Pages subdirectory
   server: {
     port: 3000,
     open: true, // Auto-open browser

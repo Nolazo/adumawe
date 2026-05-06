@@ -3,3 +3,4 @@ dist/
 *.pptx
 *.zip
 pptx_extracted/
+.atl/

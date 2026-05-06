@@ -70,10 +70,10 @@
     position: relative;
     padding-top: 8rem;
     overflow: hidden;
-    background: var(--color-secondary-bg);
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
 }
 
-/* Hero Carousel */
+/* Hero Carousel with Real Photos */
 .hero-carousel {
     position: absolute;
     top: 0;
@@ -89,8 +89,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    object-fit: cover;
+    object-position: center;
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
@@ -99,15 +99,106 @@
     opacity: 1;
 }
 
-/* Overlay para oscurecer imágenes */
+/* Hero Background Placeholder */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Ready for real images: */
+    background-size: fill;
+    background-position: center;
+    opacity: 0.3;
+}
+
+/* Overlay for text readability */
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(26, 122, 122, 0.85);
-    z-index: 0.5;
+    background: rgba(26, 122, 122, 0.75); /* Primary dark with opacity */
+    z-index: 0;
+}
+
+/* Hero Controls (UX Best Practice) */
+.hero-controls {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20; /* HIGHER than overlay (0) and hero-slide (0) */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-md);
+}
+
+.hero-prev,
+.hero-next {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary-dark);
+    border-radius: 50%;
+    background: var(--color-neutral-white);
+    color: var(--color-primary-dark);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-prev:hover,
+.hero-next:hover {
+    background: var(--color-primary-dark);
+    color: var(--color-neutral-white);
+    transform: scale(1.1);
+}
+
+.hero-prev:focus-visible,
+.hero-next:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Hero Dots Indicators */
+.hero-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.hero-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-secondary-light);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: none;
+    padding: 0;
+}
+
+.hero-dots .dot.active {
+    background: var(--color-primary-dark);
+    transform: scale(1.2);
+}
+
+.hero-dots .dot:hover {
+    background: var(--color-primary);
+}
+
+.hero-dots .dot:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 .hero-content {
@@ -123,8 +214,8 @@
 }
 
 .hero-text h1 span {
-    color: var(--color-primary-light);
-    text-shadow: none;
+    color: var(--color-secondary-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-text p {
@@ -132,6 +223,7 @@
     font-size: 1.25rem;
     margin-bottom: 2rem;
     max-width: 500px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .hero-buttons {
@@ -336,6 +428,27 @@
     margin-bottom: 1.5rem;
 }
 
+/* SVG Icon Styles */
+.icon-svg {
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+}
+
+.icon--lg .icon-svg {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.icon--md .icon-svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.icon--accent .icon-svg {
+    color: var(--color-accent);
+}
+
 /* ============================================
    QUALITY
    ============================================ */
@@ -454,23 +567,23 @@
 }
 
 /* ============================================
-   CAROUSEL / SLIDER
-   ============================================ */
+    TEAM GRID (Static, no slider)
+    ============================================ */
 
-.team-slider {
-    position: relative;
-    overflow: visible;
-    padding-bottom: 3rem;
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    padding-bottom: 2rem;
 }
 
-.team-slider .grid {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.team-slider .team-card {
-    flex: 0 0 calc(100% / 2);
-    padding: 0.5rem;
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }
 
 /* Courses */
@@ -497,11 +610,11 @@
     display: flex;
     gap: 1rem;
     padding: 0.5rem 0;
-    justify-content: center; /* Centrar cuando hay menos de 3 */
+    align-items: stretch; /* Todas las cards misma altura */
 }
 
 .course-card {
-    flex: 0 0 calc(33.333% - 0.67rem);
+    flex: 0 0 calc(33.333% - 0.67rem); /* 3 por vista en desktop */
     scroll-snap-align: start;
     background: var(--color-neutral-white);
     border: 2px solid var(--color-secondary-light);
@@ -509,7 +622,17 @@
     padding: var(--space-md);
     transition: all var(--transition-base);
     box-shadow: var(--shadow-sm);
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Altura automática - se estira con align-items: stretch del padre */
+}
+
+/* Hacer que el contenido ocupe el espacio disponible */
+.course-card ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .course-card:hover {
@@ -524,7 +647,7 @@
     margin-bottom: 1.5rem;
 }
 
-/* Carousel Controls */
+/* Carousel Controls (Courses - Match Hero Style) */
 .carousel-controls {
     position: relative;
     display: flex;
@@ -533,6 +656,94 @@
     gap: 1rem;
     margin-top: 2rem;
     z-index: 1;
+    /* Same style as .hero-controls */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-md);
+}
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary-dark);
+    border-radius: 50%;
+    background: var(--color-neutral-white);
+    color: var(--color-primary-dark);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: var(--color-primary-dark);
+    color: var(--color-neutral-white);
+    transform: scale(1.1);
+}
+
+.carousel-btn:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Dots indicators */
+.carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-secondary-light);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border: none;
+    padding: 0;
+}
+
+.dot.active {
+    background: var(--color-primary-dark);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: var(--color-primary);
+}
+
+.dot:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Dots indicators */
+.carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-secondary-light);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.dot.active {
+    background: var(--color-primary-dark);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: var(--color-primary);
 }
 
 .carousel-btn {
@@ -614,11 +825,18 @@
 /* Hide on certain sections */
 @media (max-width: 768px) {
     .carousel-controls {
-        display: none;
+        gap: 0.5rem;
     }
     
-    .carousel-dot {
-        display: none;
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
     }
 }
 
@@ -682,6 +900,16 @@
     
     .footer-social {
         justify-content: center;
+    }
+    
+    /* Cursos: 1 card por vista en móvil */
+    .course-card {
+        flex: 0 0 85%; /* Ocupa casi todo el ancho visible */
+        scroll-snap-align: center;
+    }
+    
+    .courses-track {
+        gap: 1.5rem; /* Un poco más de espacio entre cards */
     }
 }
 

@@ -72,6 +72,18 @@
     box-sizing: border-box;
 }
 
+/* Focus Visible - Accessibility */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: var(--font-size-base);
@@ -395,15 +407,6 @@ button {
     border-bottom: none;
 }
 
-.card--glass .list-check li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary-light);
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-
 .card--glass .list-check li:hover {
     padding-left: 0.5rem;
     color: var(--color-neutral-white);
@@ -586,14 +589,6 @@ button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.list-check li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary-dark);
-    font-weight: 700;
 }
 
 .list-arrow {

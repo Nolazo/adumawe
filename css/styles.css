@@ -288,8 +288,13 @@ button {
     transform: translateY(-3px);
 }
 
+.btn--hero{
+    background: var(--color-primary);
+    color: var(--color-neutral-white);   
+}
+
 .btn--primary {
-    background: var(--color-secondary-light);
+    background: var(--color-secondary);
     color: var(--color-neutral-white);
 }
 

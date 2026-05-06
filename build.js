@@ -28,6 +28,9 @@ function processIncludes(htmlContent, baseDir) {
     });
 }
 
+// Export for Vite plugin (development mode)
+module.exports = { processIncludes };
+
 /**
  * Main build function
  */

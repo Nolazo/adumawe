@@ -50,13 +50,21 @@ function build() {
         fs.mkdirSync(OUTPUT_DIR, { recursive: true });
     }
     
-    // Copy CSS and JS to dist
-    const cssDir = path.join(ROOT_DIR, 'css');
-    const jsDir = path.join(ROOT_DIR, 'js');
-    const assetsDir = path.join(ROOT_DIR, 'assets');
+    // Write the processed HTML to dist (this is what Vite will use as entry point)
+    const outputFile = path.join(OUTPUT_DIR, 'index.html');
+    fs.writeFileSync(outputFile, html, 'utf-8');
+    console.log(`✓ Processed includes: ${outputFile}`);
     
+    // Copy CSS to dist (Vite will handle JS bundling)
+    const cssDir = path.join(ROOT_DIR, 'css');
     const distCssDir = path.join(OUTPUT_DIR, 'css');
+    
+    // Copy JS modules to dist (Vite will bundle them)
+    const jsDir = path.join(ROOT_DIR, 'js');
     const distJsDir = path.join(OUTPUT_DIR, 'js');
+    
+    // Copy assets to dist
+    const assetsDir = path.join(ROOT_DIR, 'assets');
     const distAssetsDir = path.join(OUTPUT_DIR, 'assets');
     
     // Copy directories
@@ -81,13 +89,8 @@ function build() {
     copyDir(jsDir, distJsDir);
     copyDir(assetsDir, distAssetsDir);
     
-    // Update paths in HTML for dist structure (they should be relative, so should work)
-    // Write final HTML
-    const outputFile = path.join(OUTPUT_DIR, 'index.html');
-    fs.writeFileSync(outputFile, html, 'utf-8');
-    
-    console.log(`\n✅ Build complete! Output: ${outputFile}`);
-    console.log(`   Open ${outputFile} in your browser to view the site.`);
+    console.log(`\n✅ Build preparation complete! Now run: vite build`);
+    console.log(`   The dist/ folder is ready for Vite to bundle.`);
 }
 
 build();

@@ -120,7 +120,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(26, 122, 122, 0.75); /* Primary dark with opacity */
+    background: rgba(110, 122, 60, 0.75); /* Primary dark with opacity */
     z-index: 0;
 }
 
@@ -214,7 +214,7 @@
 }
 
 .hero-text h1 span {
-    color: var(--color-secondary-light);
+    color: var(--color-primary-light);
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 

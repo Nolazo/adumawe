@@ -10,6 +10,7 @@
     --color-primary: #34ccca;         /* logo color, decorative */
     --color-primary-light: #66e0de;   /* hover states */
     --color-primary-darker: #0d5c5c;  /* active/pressed states */
+    --color-primary-lighter: #34ccca17; /* background states */
 
     /* Secondary Olive Palette */
     --color-secondary-dark: #6e7a3c;  /* secondary text */
@@ -28,6 +29,7 @@
     --white-muted: rgba(255, 255, 255, 0.7);
     --white-subtle: rgba(255, 255, 255, 0.1);
     --white-border: rgba(255, 255, 255, 0.2);
+
 
     /* Typography */
     --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -93,7 +95,7 @@ body {
     font-family: var(--font-family);
     font-size: 1rem;
     line-height: var(--line-height-base);
-    color: var(--color-secondary-dark);
+    color: var(--color-primary-darker);
     background-color: var(--color-secondary-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -167,7 +169,7 @@ button {
 }
 
 .section--white { background-color: var(--color-neutral-white); }
-.section--light { background-color: var(--color-secondary-bg); }
+.section--light { background-color: var(--color-primary-lighter); }
 .section--dark { 
     background: linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-primary-dark) 100%);
     color: var(--color-neutral-white);
@@ -369,6 +371,7 @@ button {
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     padding: 2rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 13px;
 }
 
 .card--glass:hover {
